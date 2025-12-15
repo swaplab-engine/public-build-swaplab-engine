@@ -1,0 +1,76 @@
+# File name: .github/workflows/swaplab-workflow-cache.yml
+
+# ======================================================================================
+# NOTE: DO NOT RENAME THIS FILE.
+# The workflow ID "swaplab-workflow-cache.yml" is required for the SaaS integration.
+# Changing the filename will break the connection with the build server.
+# ======================================================================================
+
+# This workflow is managed by the SaaS build service
+name: SwapLab Build Android Service
+
+on:
+  # Manual trigger invoked by the SaaS Server
+  workflow_dispatch:
+    inputs:
+      appBaseUrl:
+        required: true
+      buildId:
+        required: true
+      imageName:
+        description: 'The name of the build engine image'
+        required: true
+        default: ''
+      ref:
+        description: 'The image tag to use for the build engine'
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write   # Required for secure OIDC authentication
+      contents: write
+
+    steps:
+      # 1. Checkout source code
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # 2. Cache dependencies to speed up future builds 
+      # (optional)
+      - name: Cache Gradle packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-cache-v1
+
+      #  (optional)
+      - name: Cache NPM packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-cache-v1
+      
+      # 3. Generate temporary identity token for secure server authentication
+      # https://docs.github.com/en/actions/concepts/security/openid-connect
+      - name: Get GitHub OIDC Token
+        id: get_token
+        run: |
+          AUDIENCE=${{ inputs.appBaseUrl }}
+          OIDC_TOKEN=$(curl -sfL -H "Authorization: Bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=${AUDIENCE}" | jq -r .value)
+          echo "token=${OIDC_TOKEN}" >> $GITHUB_OUTPUT
+      
+      # 4. Execute the build engine in an isolated container
+      - name: SwapLab Run Build Android Engine
+        run: |
+          docker run --rm -i \
+            -v ~/.gradle/caches:/github/workspace/.gradle/caches \
+            -v ~/.npm:/github/workspace/.cache/npm \
+            -e INPUT_APPBASEURL=${{ inputs.appBaseUrl }} \
+            -e INPUT_BUILDID=${{ inputs.buildId }} \
+            -e GITHUB_OIDC_TOKEN=${{ steps.get_token.outputs.token }} \
+            -e GITHUB_SERVER_URL=${{ github.server_url }} \
+            -e GITHUB_REPOSITORY=${{ github.repository }} \
+            -e GITHUB_RUN_ID=${{ github.run_id }} \
+            ghcr.io${{ github.event.inputs.imageName }}:${{ github.event.inputs.ref }}
