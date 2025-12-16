@@ -15,6 +15,14 @@ Unlike the **Sign-In version** (where builds run in *your* GitHub account), this
 * **🔒 Zero-Retention:** Upload your Zip, get your APK, and we delete your files instantly.
 * **🤝 Transparent & Unlimited:** Builds are executed on our **Public Engine Runner**. It is fully audit-able and **does NOT consume** your personal GitHub Action minutes.
 
+## 📺 Video Tutorials
+
+Visual learner? Watch our step-by-step guides directly on YouTube.
+
+* **🎥 [Angular to Android APK: Free Public Capacitor Build + Emulator (No Sign-In)](https://youtu.be/X-gPz8twMAI)**
+* **🎥 [Build Construct 3 AdMob Project: Public Capacitor Engine (No Sign-In)](https://youtu.be/QcQM4mRZ4rU)**
+* **🎥 [Qwik to Android APK: Free Public Build (No Sign-In Required)](https://youtu.be/2F_4uSPvCRU)**
+
 ---
 
 ## 🏗️ Architecture: The Digital Bridge
