@@ -37,6 +37,38 @@ It connects the [Public Dashboard](https://public.swaplab.net) to this open GitH
 
 ---
 
+## 🔐 Security Architecture: Battle-Tested Design
+
+We understand that "Remote Code Execution as a Service" requires rigorous security. We employ a **"Paranoid Architecture"** to ensure safety for both the platform and the user, as validated in technical discussions with the community.
+
+### 1. Total Isolation (Air-gapped Logic)
+The Public Runners (GitHub Actions) are **physically separated** from our Private/Production infrastructure. Even if the public instance melts down or gets compromised, it isolates the failure and touches nothing else.
+
+### 2. "Blind" Orchestrator & Clean Images
+Our backend operates on a **Zero-Trust** model:
+* **Clean Images:** The Docker images used are public (GHCR) and contain **zero baked-in secrets**.
+* **No Local Secrets:** Our backend (`server.js`) is stateless and has no `.env` file with credentials.
+* **Just-in-Time Access:** If a system key is ever needed, the container asks the Server -> the Server asks a **Cloudflare Worker** -> the Worker retrieves it from the encrypted **Secrets Store**.
+* *Credentials exist in memory only for the millisecond they are needed, never stored on disk.*
+
+### 3. Defense-in-Depth Strategy
+We enforce strict multi-layered security to prevent abuse and ensure stability:
+* **Front Door (Perimeter):** Our edge is guarded by **Cloudflare** enterprise tools, including **Super Bot Fight Mode**, **Turnstile** (Smart CAPTCHA), **WAF** (Web Application Firewall), and aggressive **Rate Limiting Rules**.
+* **Back Door (App Level):** Application logic is hardened using industry-standard libraries like [**helmet**](https://www.npmjs.com/package/helmet) (for HTTP header security) and [**rate-limiter-flexible**](https://www.npmjs.com/package/rate-limiter-flexible) for granular traffic control.
+
+### 4. Abuse Prevention & Resilience
+We enforce strict hard-limits on CPU usage, execution time (to prevent crypto-mining), and network egress.
+* **DDoS Resilient:** Our infrastructure successfully mitigated targeted attacks (e.g., Dec 11th incident) with **zero downtime**.
+
+
+> **🛡️ A Note on Community Integrity:**
+> SwapLab Public Engine is provided as a **100% free resource** dedicated to helping developers test and create.
+>
+> While our infrastructure is battle-tested, every malicious attempt to disrupt the service consumes resources meant for the community. We maintain a **Zero-Tolerance Policy** against abuse to ensure this service remains open, fast, and available for legitimate developers who rely on it.
+
+
+---
+
 ## ⚙️ Configuration Guide (UI Settings)
 
 To build your app on [public.swaplab.net](https://public.swaplab.net), you must configure **3 Mandatory Options**. These settings map directly to our public Docker images.
@@ -52,6 +84,7 @@ Upload your project folder compressed as a `.zip` file.
 
 ### 3. Image Name (Hybrid Mobile App Stack)
 Select the Docker Image (Build Engine) to compile your app. These images are hosted on our [GitHub Packages Registry](https://github.com/orgs/swaplab-engine/packages).
+
 
 | Image Name | Stack Description |
 | :--- | :--- |
@@ -72,7 +105,7 @@ Select the Docker Image (Build Engine) to compile your app. These images are hos
 This repository contains **only** the orchestration logic required to run the build containers.
 
 * **Workflows:** [`/.github/workflows/swaplab-workflow-cache.yml`](https://github.com/swaplab-engine/public-build-swaplab-engine/blob/main/.github/workflows/swaplab-workflow-cache.yml)
-    * This is the script that pulls your temporary zip, runs the Docker container, and uploads the artifact.
+    * This is the script that pulls your temporary zip, runs the Docker container, and uploads the artifact.
 
 **Note:** No user source code is stored in this repository. Code is injected ephemerally at runtime and destroyed immediately after.
 
@@ -94,10 +127,10 @@ This public engine is fully capable of building the entire SwapLab template ecos
 
 Because this is a public repository, we enforce strict privacy measures for the **Public Builder Service**:
 
-1.  **Ephemeral Storage:** Your source code is deleted from our storage immediately after extraction.
-2.  **Short-Lived Artifacts:** Build results (APKs) are automatically deleted after **1 hour**.
-3.  **Masked Logs:** Sensitive inputs (like Build IDs) are masked in the public logs.
-4.  **No Private Keys:** This service is for **Debug Builds only**. It does not accept private signing keystores.
+1.  **Ephemeral Storage:** Your source code is deleted from our storage immediately after extraction.
+2.  **Short-Lived Artifacts:** Build results (APKs) are automatically deleted after **1 hour**.
+3.  **Masked Logs:** Sensitive inputs (like Build IDs) are masked in the public logs.
+4.  **No Private Keys:** This service is for **Debug Builds only**. It does not accept private signing keystores.
 
 For more details, please read our dedicated policies for the Public Service:
 
@@ -114,5 +147,5 @@ You do not need to fork or clone this repository. Simply visit the dashboard to 
 
 ---
 <p align="center">
-  Maintained by <b>SwapLab Engineering Team</b>
+  Maintained by <b>SwapLab Engineering Team</b>
 </p>
