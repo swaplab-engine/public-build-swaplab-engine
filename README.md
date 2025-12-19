@@ -63,6 +63,22 @@ We enforce strict hard-limits on CPU usage, execution time (to prevent crypto-mi
 * **DDoS Resilient:** Our infrastructure successfully mitigated targeted attacks (e.g., Dec 11th incident) with **zero downtime**.
 
 
+### 5. Verified Data Destruction (R2 Storage)
+> **🛡️ The SwapLab system is designed like GitHub Actions: Ephemeral & Self-Destructing:**
+
+We implement a strict **"Extract & Destroy"** policy. Your `project.zip` is stored in Cloudflare R2 only for the few seconds required to download it to the build runner.
+* **Immediate Deletion:** The build engine automatically calls the Cloudflare R2 [`delete-objects`](https://developers.cloudflare.com/r2/objects/delete-objects/) API immediately after unzipping your project.
+* **Live Verification:** You can witness this process in real-time in the public build logs (see the **[SolidJS Demo Video](https://youtu.be/HkwGipmVWTA)** for proof):
+    ```text
+    > 🔒 Downloading pre-signed project from secure link...R2
+    > Unzipping project securely...
+    > 🛡️ ClamAV Scanning solidjs for threats...
+    > Requesting immediate deletion of source files from R2 storage...
+    > ✅ Source files deletion successfully requested.
+    ```
+This ensures your source code never sits dormant in our storage buckets.
+
+
 > **🛡️ A Note on Community Integrity:**
 > SwapLab Public Engine is provided as a **100% free resource** dedicated to helping developers test and create.
 >
