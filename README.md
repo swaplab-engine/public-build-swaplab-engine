@@ -97,8 +97,11 @@ Select the framework that matches your source code template:
 * **Cordova**
 * **Framework7**
 
-### 2. Project File (.zip)
-Upload your project folder compressed as a `.zip` file.
+### 2. Project File (.zip) or Git Repository
+- Upload your project folder compressed as a `.zip` file.
+- Git Repository: input/paste Build directly from a public Git URL,
+> Checked option ✅ I confirm this is a public GitHub repository.
+* **📜 [Simple example with Git Repository](https://github.com/swaplab-engine/cordova-plugin-admob-nextgen/discussions/4)**
 
 ### 3. Image Name (Hybrid Mobile App Stack)
 Select the Docker Image (Build Engine) to compile your app. These images are hosted on our [GitHub Packages Registry](https://github.com/orgs/swaplab-engine/packages).
