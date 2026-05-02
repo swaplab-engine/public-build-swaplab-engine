@@ -35,12 +35,12 @@ jobs:
     steps:
       # 1. Checkout source code
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       # 2. Cache dependencies to speed up future builds 
       # (optional)
       - name: Cache Gradle packages
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-cache-v1
