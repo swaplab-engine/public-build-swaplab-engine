@@ -7,7 +7,7 @@
 # ======================================================================================
 
 # This workflow is managed by the SaaS build service
-name: SwapLab Build Android Service
+name: SwapLab Build Service Android/IOS
 
 on:
   # Manual trigger invoked by the SaaS Server
