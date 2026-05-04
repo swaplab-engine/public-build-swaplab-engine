@@ -35,7 +35,7 @@ It connects the [Public Dashboard](https://public.swaplab.net) to this open GitH
 
 * **⚡️ Standard GitHub Actions:** We use standard `.yml` workflows to orchestrate the build.
 * **∞ Unlimited Minutes:** Because the build runs in *our* repository, it utilizes SwapLab's organization quota.
-* **🔍 Fully Auditable:** You can view the [Actions Tab](https://github.com/swaplab-engine/public-build-swaplab-engine/actions) to verify that no malicious code is injected during the build process.
+* **🔒 Secure & Private Logging:** To protect your source code and build environment, public log streaming on the GitHub Actions tab is intentionally disabled. Instead, your real-time build logs are securely routed directly to your personal SwapLab UI. By utilizing a unique Build ID and Guest ID mapping, we ensure that your build process is completely isolated—no other users can view your logs or project data.
 
 ---
 
