@@ -42,15 +42,17 @@ jobs:
       - name: Cache Gradle packages
         uses: actions/cache@v5
         with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-cache-v1
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-cache-v2
 
       #  (optional)
       - name: Cache NPM packages
         uses: actions/cache@v4
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-npm-cache-v1
+          key: ${{ runner.os }}-npm-cache-v2
       
       # 3. Generate temporary identity token for secure server authentication
       # https://docs.github.com/en/actions/concepts/security/openid-connect
