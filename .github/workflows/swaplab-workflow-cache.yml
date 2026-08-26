@@ -45,7 +45,7 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-cache-v2
+          key: ${{ runner.os }}-gradle-cache-v3
 
       #  (optional)
       - name: Cache NPM packages
