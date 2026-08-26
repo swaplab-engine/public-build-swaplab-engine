@@ -67,7 +67,7 @@ jobs:
       - name: SwapLab Run Build Android Engine
         run: |
           docker run --rm -i \
-            -v ~/.gradle/caches:/github/workspace/.gradle/caches \
+            -v ~/.gradle:/github/workspace/.gradle \
             -v ~/.npm:/github/workspace/.cache/npm \
             -e INPUT_APPBASEURL=${{ inputs.appBaseUrl }} \
             -e INPUT_BUILDID=${{ inputs.buildId }} \
