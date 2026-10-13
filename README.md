@@ -8,11 +8,6 @@ This repository serves as the **transparent execution engine** for **[public.swa
 
 Unlike the **Private Builder version** (where builds securely run in *your* private GitHub repository), this repository hosts the public runners that execute anonymous builds for the community.
 
-> **📢 Notice on Legacy Sign-In Services:** 
-> To improve maintainability and user experience, our previous individual sign-in builders (`cordova.swaplab.net`, `capacitor.swaplab.net`, and `repository.swaplab.net`) have been discontinued and officially consolidated into a single, unified platform: **[private.swaplab.net](https://private.swaplab.net)**.
-> 
-> **💎 100% Free for the Community:** The new Private Builder is designed strictly as a free tool for developers. There are **no hidden fees, no subscriptions**, and absolutely **no whitelist restrictions** on NPM packages or custom plugins. You get enterprise-grade secure builds at zero cost.
-
 ### Why use the Public Engine?
 
 * **🛡️ No Sign-In Required:** We don't ask for your GitHub account or email.
@@ -162,8 +157,7 @@ Because this is a public repository, we enforce strict privacy measures for the 
 
 For more details, please read our dedicated policies for the Public Service:
 
-* **📜 [Terms & Conditions](https://public.swaplab.net/privacy-policy/terms-and-conditions.html)**
-* **🔒 [Privacy Policy](https://public.swaplab.net/privacy-policy/privacy-policy.html)**
+* **🔒 [Privacy Policy](https://swaplab.net/privacy-policy/privacy-policy.html)**
 
 ---
 
