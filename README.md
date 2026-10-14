@@ -37,7 +37,7 @@ It connects the [Public Dashboard](https://public.swaplab.net) to this open GitH
 
 * **⚡️ Standard GitHub Actions:** We use standard `.yml` workflows to orchestrate the build.
 * **∞ Unlimited Minutes:** Because the build runs in *our* repository, it utilizes SwapLab's organization quota.
-* **🔒 Secure & Private Logging:** To protect your source code and build environment, public log streaming on the GitHub Actions tab is intentionally disabled. Instead, your real-time build logs are securely routed directly to your personal SwapLab UI. By utilizing a unique Build ID and Guest ID mapping, we ensure that your build process is completely isolated—no other users can view your logs or project data.
+* **🔒 Secure & Private Logging:** To protect your source code and build environment, public log streaming on the GitHub Actions tab is intentionally disabled. Instead, your real-time build logs are securely routed directly to your personal SwapLab UI (They are streamed securely via WebSocket only to your browser session). By utilizing a unique Build ID and Guest ID mapping, we ensure that your build process is completely isolated—no other users can view your logs or project data.
 
 ---
 
@@ -145,17 +145,6 @@ This public engine is fully capable of building the entire SwapLab template ecos
 | **[Template Framework7](https://github.com/swaplab-engine/template-framework7)** | Native-look UI apps built with Framework7. |
 
 ---
-
-## 🛡️ Privacy & Zero-Retention Policy
-
-Because this is a public repository, we enforce strict privacy measures for the **Public Builder Service**:
-
-1.  **Ephemeral Storage:** Your source code is deleted from our storage immediately after extraction.
-2.  **Short-Lived Artifacts:** Build results (APKs) are automatically deleted after **1 hour**.
-3.  **Masked Logs:** Sensitive inputs (like Build IDs) are masked in the public logs.
-4.  **No Private Keys:** This service is for **Debug Builds only**. It does not accept private signing keystores.
-
-For more details, please read our dedicated policies for the Public Service:
 
 * **🔒 [Privacy Policy](https://swaplab.net/privacy-policy/privacy-policy.html)**
 
