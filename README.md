@@ -14,6 +14,9 @@ Unlike the **Private Builder version** (where builds securely run in *your* priv
 * **📦 Unlimited Plugins:** Supports **ANY** Capacitor/Cordova Plugin or NPM package (including custom git URLs). We do not enforce a whitelist restrictions.
 * **🔒 Zero-Retention:** Upload your Zip, get your APK, and we delete your files instantly.
 * **🤝 Transparent & Unlimited:** Builds are executed on our **Public Engine Runner**. It is fully audit-able and **does NOT consume** your personal GitHub Action minutes.
+* **🕵️ Build Trust & Verify:** We do more than just build. (Docker image SwapLab) actively scans your project for vulnerabilities using **npm audit**, **Source Malware Scans**, **Semgrep (SAST)**, and **Trivy (SCA)**. This ensures your app is completely free of viruses, trojans, or malicious dependencies *before* you upload it to the App Store or hand it over to clients and friends.
+* **🛠️ Ideal for Plugin Developers:** An isolated, sterile environment perfect for testing and developing custom **Cordova** or **Capacitor** plugins safely.
+
 
 ## 📺 Video Tutorials
 
