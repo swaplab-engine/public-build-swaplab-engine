@@ -28,6 +28,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 15 # Maximum execution time limit for a job (15 minutes)
     permissions:
       id-token: write   # Required for secure OIDC authentication
       contents: write
